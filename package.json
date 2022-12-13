@@ -10,8 +10,11 @@
     "validator": "^13.7.0"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
