@@ -16,7 +16,7 @@ router
   .get(langsControllers.getLanguage)
   .patch(
     authController.protect,
-    authController.restrictTo("admin", "user"),
+    authController.restrictTo("admin"),
     langsControllers.uploadLangPhoto,
     langsControllers.updateLang
   )

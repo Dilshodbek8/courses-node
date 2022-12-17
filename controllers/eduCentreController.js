@@ -16,7 +16,7 @@ exports.allCentres = catchAsync(async (req, res) => {
 });
 
 exports.getCentre = catchAsync(async (req, res) => {
-  const centre = await EduCentres.findById(req.params.id);
+  const centre = await EduCentres.findById(req.params.id).populate("reviews");
   res.status(200).json({
     status: "success",
     data: centre,

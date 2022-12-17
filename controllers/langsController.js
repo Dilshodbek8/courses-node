@@ -6,7 +6,7 @@ const AppError = require("./../utils/appError");
 
 const multerStorage = multer.diskStorage({
   destination: (req, res, cb) => {
-    cb(null, "public/img/languages");
+    cb(null, "../img");
   },
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/")[1];
