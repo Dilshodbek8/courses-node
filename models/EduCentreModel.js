@@ -46,15 +46,18 @@ const EduSchema = new mongoose.Schema(
       type: Array,
     },
     links: {
-      type: Array,
+      type: [
+        {
+          name: String,
+          link: String,
+        },
+      ],
     },
     mainAddress: {
       type: String,
       required: [true, "Edu Center must have a address"],
     },
-    address: {
-      type: Array,
-    },
+
     ratingsAverage: {
       type: Number,
       default: 0,
@@ -70,6 +73,26 @@ const EduSchema = new mongoose.Schema(
     subjects: {
       type: mongoose.Schema.ObjectId,
       ref: "Subjects",
+    },
+    it: {
+      type: mongoose.Schema.ObjectId,
+      ref: "It",
+    },
+    other: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Other",
+    },
+    video: {
+      type: String,
+    },
+    branches: {
+      type: [
+        {
+          name: String,
+          address: String,
+          phone: String,
+        },
+      ],
     },
   },
   {
