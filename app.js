@@ -18,12 +18,18 @@ app.use(
 );
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use("/api/v1/langs", langRoutes);
 app.use("/api/v1/subjects", subRoutes);
 app.use("/api/v1/edu", eduRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
 app.use("/api/v1/other", otherRoutes);
+app.use("/api/v1/img", imgRoutes);
 app.use("/api/v1/it", itRoutes);
 
 app.all("*", (req, res, next) => {
