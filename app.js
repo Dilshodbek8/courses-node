@@ -8,7 +8,14 @@ const userRoutes = require("./routes/userRoutes");
 const imgRoutes = require("./routes/imgRoutes");
 const AppError = require("./utils/appError");
 const globalError = require("./controllers/errorControllers");
+const cors = require("cors");
+
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use("/api/v1/langs", langRoutes);
 app.use("/api/v1/subjects", subRoutes);
 app.use("/api/v1/edu", eduRoutes);

@@ -12,7 +12,7 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
     status: "success",
     results: reviews.length,
     data: {
-      reviews,
+     reviews,
     },
   });
 });
