@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Reviews = require("./reviewsModel");
 const EduSchema = new mongoose.Schema(
   {
     name_Uz: {
@@ -110,10 +109,19 @@ EduSchema.pre(/^find/, function (next) {
   this.populate({
     path: "langs",
     select: "-__v",
-  }).populate({
-    path: "subjects",
-    select: "-__v",
-  });
+  })
+    .populate({
+      path: "subjects",
+      select: "-__v",
+    })
+    .populate({
+      path: "it",
+      select: "-__v",
+    })
+    .populate({
+      path: "other",
+      select: "-__v",
+    });
 
   next();
 });
