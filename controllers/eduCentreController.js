@@ -2,7 +2,18 @@ const ApiFeatures = require("./../utils/apiFeatures");
 const catchAsync = require("./../utils/catchAsync");
 const EduCentres = require("./../models/EduCentreModel");
 exports.allCentres = catchAsync(async (req, res) => {
-  const features = new ApiFeatures(EduCentres.find(), req.query)
+  const features = new ApiFeatures(
+    EduCentres.find().populate({
+      path: "langs",
+      path: "subjects",
+      path: "it",
+      path: "other",
+      perDocumentLimit: 1000,
+    }),
+
+    req.query
+  )
+
     .filter()
     .sort()
     .limitFields()

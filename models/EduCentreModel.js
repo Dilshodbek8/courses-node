@@ -66,34 +66,40 @@ const EduSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    langs: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Languages",
-    },
-    subjects: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Subjects",
-    },
-    it: {
-      type: mongoose.Schema.ObjectId,
-      ref: "It",
-    },
-    other: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Other",
-    },
+    langs: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Languages",
+      },
+    ],
+    subjects: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Subjects",
+      },
+    ],
+    it: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "It",
+      },
+    ],
+    other: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Other",
+      },
+    ],
     video: {
       type: String,
     },
-    branches: {
-      type: [
-        {
-          name: String,
-          address: String,
-          phone: String,
-        },
-      ],
-    },
+    branches: [
+      {
+        name: String,
+        address: String,
+        phone: String,
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
