@@ -1,12 +1,31 @@
 const ApiFeatures = require("./../utils/apiFeatures");
 const catchAsync = require("./../utils/catchAsync");
 const EduCentres = require("./../models/EduCentreModel");
-exports.allCentres = catchAsync(async (req, res) => {
-  const features = new ApiFeatures(
-    EduCentres.find(),
+const multer = require("multer");
 
-    req.query
-  )
+const multerStorage = multer.diskStorage({
+  destination: (req, res, cb) => {
+    cb(null, "../img");
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `edu-${req.user.id}-${Date.now()}.${ext}`);
+  },
+});
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new AppError("please upload only images", 400), false);
+  }
+};
+const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
+
+exports.uploadEduPhoto = upload.single("photo");
+
+exports.allCentres = catchAsync(async (req, res) => {
+  const features = new ApiFeatures(EduCentres.find(), req.query)
 
     .filter()
     .sort()
@@ -29,7 +48,10 @@ exports.getCentre = catchAsync(async (req, res) => {
 });
 
 exports.createCentre = catchAsync(async (req, res) => {
-  const newCentre = await EduCentres.create(req.body);
+  const data = { ...req.body };
+  if (req.file) data.photo = req.file.filename;
+  const newCentre = await EduCentres.create(data);
+
   res.status(201).json({
     status: "success",
     data: newCentre,

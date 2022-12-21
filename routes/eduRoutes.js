@@ -7,6 +7,7 @@ router
   .get(eduCentreController.allCentres)
   .post(
     authController.protect,
+    eduCentreController.uploadEduPhoto,
     authController.restrictTo("admin"),
     eduCentreController.createCentre
   );

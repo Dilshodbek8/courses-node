@@ -5,21 +5,21 @@ const EduSchema = new mongoose.Schema(
       type: String,
       trim: true,
       unique: true,
-      required: true,
+      // required: true,
       maxlength: [40, "Description must have less or equal 40"],
     },
     name_Ru: {
       type: String,
       trim: true,
       unique: true,
-      required: true,
+      // required: true,
       maxlength: [40, "Description must have less or equal 40"],
     },
     name_En: {
       type: String,
       trim: true,
       unique: true,
-      required: true,
+      // required: true,
       maxlength: [40, "Description must have less or equal 40"],
     },
     description_Uz: {
@@ -54,8 +54,9 @@ const EduSchema = new mongoose.Schema(
     },
     mainAddress: {
       type: String,
-      required: [true, "Edu Center must have a address"],
+      // required: [true, "Edu Center must have a address"],
     },
+    photo: String,
 
     ratingsAverage: {
       type: Number,
