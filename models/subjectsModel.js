@@ -16,6 +16,7 @@ const SubjectsSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  photo: String,
 });
 const Subjects = mongoose.model("Subjects", SubjectsSchema);
 module.exports = Subjects;

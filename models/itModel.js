@@ -16,6 +16,7 @@ const ItSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  photo: String,
 });
 const It = mongoose.model("It", ItSchema);
 module.exports = It;

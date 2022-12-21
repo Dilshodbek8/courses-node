@@ -16,6 +16,7 @@ const OtherSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  photo: String,
 });
 const Other = mongoose.model("Other", OtherSchema);
 module.exports = Other;
