@@ -26,7 +26,6 @@ exports.uploadEduPhoto = upload.single("photo");
 
 exports.allCentres = catchAsync(async (req, res) => {
   const features = new ApiFeatures(EduCentres.find(), req.query)
-
     .filter()
     .sort()
     .limitFields()
@@ -48,7 +47,11 @@ exports.getCentre = catchAsync(async (req, res) => {
 });
 
 exports.createCentre = catchAsync(async (req, res) => {
-  const data = { ...req.body };
+  let langs = JSON.parse(req.body?.langs);
+  let subjects = JSON.parse(req.body?.subjects);
+  let it = JSON.parse(req.body?.it);
+  let other = JSON.parse(req.body?.other);
+  let data = { ...req.body, langs, subjects, it, other };
   if (req.file) data.photo = req.file.filename;
   const newCentre = await EduCentres.create(data);
 
@@ -58,7 +61,13 @@ exports.createCentre = catchAsync(async (req, res) => {
   });
 });
 exports.updateCentre = catchAsync(async (req, res) => {
-  const centre = await EduCentres.findByIdAndUpdate(req.params.id, req.body, {
+  let langs = JSON.parse(req.body?.langs);
+  let subjects = JSON.parse(req.body?.subjects);
+  let it = JSON.parse(req.body?.it);
+  let other = JSON.parse(req.body?.other);
+  let data = { ...req.body, langs, subjects, it, other };
+  if (req.file) data.photo = req.file.filename;
+  const centre = await EduCentres.findByIdAndUpdate(req.params.id, data, {
     new: true,
     runValidators: true,
   });

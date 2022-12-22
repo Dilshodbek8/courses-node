@@ -17,6 +17,7 @@ router
   .get(eduCentreController.getCentre)
   .patch(
     authController.protect,
+    eduCentreController.uploadEduPhoto,
     authController.restrictTo("admin"),
     eduCentreController.updateCentre
   )
