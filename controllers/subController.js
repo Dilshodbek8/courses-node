@@ -24,7 +24,9 @@ exports.getSub = catchAsync(async (req, res) => {
 });
 
 exports.createSub = catchAsync(async (req, res) => {
-  const newSubject = await Subjects.create(req.body);
+  const data = { ...req.body };
+  if (req.file) data.photo = req.file.filename;
+  const newSubject = await Subjects.create(data);
   res.status(201).json({
     status: "success",
     data: {
@@ -34,7 +36,9 @@ exports.createSub = catchAsync(async (req, res) => {
 });
 
 exports.updateSub = catchAsync(async (req, res) => {
-  const sub = await Subjects.findByIdAndUpdate(req.params.id, req.body, {
+  const data = { ...req.body };
+  if (req.file) data.photo = req.file.filename;
+  const sub = await Subjects.findByIdAndUpdate(req.params.id, data, {
     new: true,
     runValidators: true,
   });
